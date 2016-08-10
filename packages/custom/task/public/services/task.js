@@ -1,20 +1,19 @@
 (function() {
     'use strict';
 
-    function Task($http, $q) {
+    function Task($http, $q, $resource) {
         return {
-            name: 'task',
-            checkCircle: function(circle) {
-                var deferred = $q.defer();
-
-                $http.get('/api/task/example/' + circle).success(function(response) {
-                    deferred.resolve(response);
-                }).error(function(response) {
-                    deferred.reject(response);
-                });
-                return deferred.promise;
-
-            }
+            task: $resource('/api/task/:taskId', {
+                taskId: '@_id'
+            }, {
+                update: {
+                    method: 'PUT'
+                },
+                query: {
+                    method: 'GET',
+                    isArray: true
+                }
+            })
         };
     }
 
@@ -22,6 +21,6 @@
         .module('mean.task')
         .factory('Task', Task);
 
-    Task.$inject = ['$http', '$q'];
+    Task.$inject = ['$http', '$q', '$resource'];
 
 })();

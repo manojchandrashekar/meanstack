@@ -17,7 +17,7 @@ var webpack = require('webpack');
 var webpackConfig = require('../webpack.config.js');
 
 /*var defaultTasks = ['clean', 'jshint', 'less', 'csslint', 'devServe', 'watch'];*/
-var defaultTasks = ['webpack:build-dev', 'clean', 'less', 'sass', 'csslint', 'devServe', 'watch'];
+var defaultTasks = ['webpack:build-dev', 'clean', 'devServe'];
 
 gulp.task('env:development', function() {
   process.env.NODE_ENV = 'development';

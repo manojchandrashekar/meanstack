@@ -26,13 +26,6 @@ module.exports = function(taskCtrl) {
          * Create
          */
         create: function(req, res) {
-            req.assert('name', 'You must enter name').notEmpty();
-            req.assert('description', 'You must enter description').notEmpty();
-
-            var errors = req.validationErrors();
-            if (errors) {
-                return res.status(400).send(errors);
-            }
             var task = new taskModel(req.body);
             task.save(function(err) {
                 if (err) {
